@@ -1,0 +1,57 @@
+\chapter{Measurements}
+
+\begin{figure}
+\begin{tikzpicture}
+
+% ruler
+ 
+            %% lower divisions
+            \foreach \x in {0,1,...,10}{
+            \draw (\x,0) -- (\x,0.2)node[above,scale=0.4]{\x};
+            }
+            \foreach \x in {0.1,0.2,...,9.9}{
+            \draw (\x,0) -- (\x,0.075);
+            }
+            \foreach \x in {0.5,1,...,9.5}{
+            \draw (\x,0) -- (\x,0.15);
+            }
+
+
+\node(a) [cylinder,draw, rotate=90, minimum height=2cm,aspect=0.25,minimum width=5cm,text width=1cm,align=center] at (0,0) {\rotatebox{-90}{ERP}} ;
+
+\node(a) [cylinder,draw, rotate=90, minimum height=2cm,aspect=0.25,minimum width=5cm,text width=1cm,align=center] at (10,0)  {\rotatebox{-90}{Sistemas de Vendas Legado}} ;
+\end{tikzpicture}
+    \caption{Tentando usar cilindros, mas varia com o texto dentro dele }
+    \label{fig:tentacili}
+\end{figure}
+
+
+\begin{figure}
+\begin{tikzpicture}
+
+% ruler
+ 
+            %% lower divisions
+            \foreach \x in {0,1,...,10}{
+            \draw (\x,0) -- (\x,0.2)node[above,scale=0.4]{\x};
+            }
+            \foreach \x in {0.1,0.2,...,9.9}{
+            \draw (\x,0) -- (\x,0.075);
+            }
+            \foreach \x in {0.5,1,...,9.5}{
+            \draw (\x,0) -- (\x,0.15);
+            }
+
+
+\node(a) [cylinder,draw, rotate=90, minimum height=2cm,minimum width=3cm,align=center] at (0,0) {};
+\node (d) [rectangle, minimum height=2cm,aspect=0.25,minimum width=5cm,text width=2cm,align=center] at (0,0) { ERP};
+
+\node(b) [cylinder,draw, rotate=90, minimum height=2cm,minimum width=3cm,align=center] at (5,0) {} ;
+\node(c) [rectangle, minimum height=2cm,aspect=0.25,minimum width=5cm,text width=2cm,align=center] at (5,0) { Sistemas Legados};
+%{\rotatebox{-90}{Sistemas de Vendas Legado}} ;
+\end{tikzpicture}
+
+    \caption{Tentando usar cilindros,texto de fora }
+    \label{fig:tentacili1}
+\end{figure}
+

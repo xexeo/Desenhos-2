@@ -1,0 +1,506 @@
+\chapter{Arquiteturas}
+
+
+\begin{figure}
+    \centering
+\begin{tikzpicture}
+[proc/.style = {rectangle,rounded corners=10,draw=blue,font=\sffamily,fill=blue!10,align=center,thick,minimum height = 32pt, minimum width = 6em},
+app/.style = { rectangle,rounded corners=10,dashed,very thick,draw,inner sep=12pt,fill=blue!30},
+seta/.style = {-{LaTeX},draw,thick,blue}]
+
+\node[proc] (RH) at (0,0) {\textbf{Request} \\ \textbf{Handler}};
+
+\node[right = of RH] (fake) {};
+
+\node[proc,right = of fake] (RW)  
+{\textbf{Response} \\ \textbf{Writer}};    
+
+\node[proc,below = of fake,yshift=-12pt] (In)  
+{ \textbf{Index}};    
+\node[proc,above = of RH] (Q)  
+{ \textbf{Query}};    
+\node[proc,above = of RW] (R)  
+{ \textbf{Response}};    
+\node[proc,below = of In] (UH)  
+{ \textbf{Update Handler}};  
+
+
+
+\begin{pgfonlayer}{bm}
+\node[app,fill=blue!20,draw,fit=(In)] (Lucene)  {};
+\end{pgfonlayer}
+\begin{pgfonlayer}{background}
+\node[app,fit=(RH)(RW)(Lucene)(UH)] (Solr) {};
+\end{pgfonlayer}
+
+\node[text=white,fill=purple,anchor=west] (Name1) at (Solr.north west) {\textbf{Solr}};
+\node[text=white,fill=purple,anchor=west] (Name2) at (Lucene.north west) {\textbf{Lucene}};
+
+
+\node[proc, right = of UH,xshift=5em] (DS) {\textbf{Data Source}};
+
+\path[seta](Q) -- (RH);
+\path[seta](RW) -- (R);
+\path[seta](RH) |- (In);
+\path[seta](In) -| (RW);
+\path[seta](UH) -- (In);
+\path[seta](DS) -- (UH);
+\end{tikzpicture}
+
+
+
+    
+    \caption{Solr Architecture}
+    \label{fig:my_solrarh}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \label{fig:qrocha}
+    \begin{tikzpicture}
+    \tikzmath{  \yd = 1.3 ; 
+                \xd = 1.75 ;
+                \x1 = 0 ; 
+                \y1 = 0 ;
+                \x2 = \x1 + \xd*1.5 ;
+                \x3 = \x2 + 2*\xd ;
+                \x4 = \x3 + \xd ;
+                \x6 = \x4 + \xd ;
+                \x5 = \x4 + 1.5*\xd ;
+                \y2 = \y1 + \yd ;
+                \y3 = \y2 + \yd ;
+                \y4 = \y3 + \yd ;
+                \y5 = \y4 + \yd ;
+                \y6 = \y5 + \yd ;
+                \y7 = \y6 + \yd ;         
+                }
+    \node[cloud,draw,aspect=2] (software) at (\x2,\y1) {Software};
+    \node[ellipse,align=center,draw] (avaliacao) at (\x3,\y2) {Avaliação};
+    \node[draw=black,rectangle] (medidas) at (\x2,\y3) {Medidas};
+    \node[draw=black,rectangle] (crit) at (\x4,\y3) {Critérios};
+    \node[rectangle,align=center,draw] (proc) at (\x5,\y2) {Processo de\\ Avaliação};
+    \node[draw=black,ellipse,draw] (agre) at (\x2,\y4) {Agregar};
+    \node[draw=black,rectangle] (medagre) at (\x2,\y5) {Medidas Agregadas};
+    \node[draw=black,rectangle] (atrib) at (\x4,\y5)  {Atributos} edge [in=30,out=60,loop right] node[below=0.3]{são  compostos por} ();
+    \node[draw=black,rectangle] (obj) at (\x4,\y6) {Objetivos};
+    \node[align=center] (rq) at (\x2,\y7) {\textbf{Relações} \\  \textbf{Quantitativas}};
+    \node[align=center] (rl) at (\x4,\y7) {\textbf{Relações} \\ \textbf{Lógicas}};
+    \node[rectangle,draw,rotate=90] (fz) at (\x1,\y4) {Funções Fuzzy};
+    
+    \draw[thick,dashed] (avaliacao.north) -- (\x3,\y7) ;
+    \draw[->] (software) -- (avaliacao);
+    \draw[->] (avaliacao) -- (medidas.south east);
+    \draw[->] (medidas) -- (agre);
+    \draw[->] (agre) -- (medagre);
+    \draw[->] (medagre) -- node [midway,above] {quantificam} (atrib);
+    \draw[->] (medidas) --node [midway,above] {quantificam}  (crit);
+    \draw[->] (crit) -- node [midway, above right] {determinam} (proc);
+    \draw[->] (atrib) --node [midway,right] {são compostos por}  (crit);
+\draw[->] (obj) -- node [midway,right] {são atingidos por}  (atrib);
+    
+    \draw[->] (fz.east) |- node [midway,above] {interpretam} (medagre.west);
+    \draw[->] (fz.west) |- node [midway,below] {interpretam} (medidas.west);
+\end{tikzpicture} 
+    \caption{Modelo Fuzzy de Qualidade Rocha }
+    
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}%
+[every node/.style={%
+draw,%
+black,%
+align=center,%
+node distance=1cm and 1cm,%
+minimum height = 1.5cm,%
+minimum width = 3cm,
+},
+every path/.style={%
+black,
+Latex-Latex,
+thick
+}%
+]
+
+\node (CPU) at (0,0) {CPU};
+\node (MP) [left = of CPU]  {Memória \\ Princial};
+\node (MA) [right = of CPU]  {Memória \\ Auxiliar};
+\node (ES) [above = of CPU]  {Dispositivo \\ de Entrada \\ e Saída};
+
+\draw (CPU.east) -- (MA.west);
+\draw (CPU.west) -- (MP.east);
+\draw (CPU.north) -- (ES.south);
+
+\end{tikzpicture}
+    \caption{Computador Simples, usa estilos genéricos}
+    \label{fig:comp1s}
+\end{figure}
+
+
+
+\autoref{fig:comp12s} uses different interesting commands, such as calculating point position by the intersections of a vertical and a a horizontal reference (using \verb!(h-|v)! or \verb!(v|-h)!, general and specific styles, style overwriting, y and x shifts in points, etc.
+
+\begin{verbatim}
+\begin{tikzpicture}%
+[every node/.style={%
+draw,%
+black,%
+align=center,%
+node distance=1cm and 3cm,%
+minimum height = 1.5cm,%
+minimum width = 3cm,
+},
+registro/.style={%
+minimum height = 18pt,%
+minimum width = 4cm,
+node distance=.5cm and 3cm,%
+},
+every path/.style={%
+black,
+Latex-Latex,
+thick
+}%
+]
+
+\node (UdC) at (0,0) {Unidade \\ de Controle};
+\node (ALU) [above = of UdC]  {ALU};
+\node (B) [above = of ALU]  {Buffer};
+
+\node[registro] (Pilha) [right = of UdC] {Registro de Pilha};
+\node[registro] (End) [above = of Pilha] {Registro de Endereço};
+\node[registro] (Regn) [above = of End]  {Registro Geral N};
+\node[registro,draw=none] (Regp) [above = of Regn]  {...};
+\node[registro] (Reg2) [above = of Regp]  {Registro Geral 2};
+\node[registro] (Reg1) [above = of Reg2]  {Registro Geral 1};
+ 
+\node[draw=none] (ini) at  (2,-1) {};
+\node[draw=none]  at (2,7) {};
+ %($(UdC.south west)!.5!(Pilha.east)$)
+\draw[-,ultra thick] ([yshift=-10pt]3,0|-Pilha.west) -- ([yshift=10pt]3,0|-Reg1.west);
+\draw (Pilha.west) -- (3,0|-Pilha.west);
+\draw (Reg1.west) -- (3,0|-Reg1.west); 
+\draw (Reg2.west) -- (3,0|-Reg2.west);
+\draw (Regn.west) -- (3,0|-Regn.west);
+\draw (End.west) -- (3,0|-End.west);  
+\draw (ALU.east) -- (3,0|-ALU.east);  
+\draw (UdC.east) -- (3,0|-UdC.east);  
+\draw (B.east) -- (3,0|-B.east);  
+
+\draw[-,ultra thick] ([xshift=15pt,yshift=15pt]Reg1.north)
+-- node [pos=0.5,draw=none,above] {Barramento 
+de Dados} ([xshift=-15pt,yshift=15pt]Reg1.north-|B.north);
+\draw ([yshift=15pt]Reg1.north)
+-- (Reg1.north) ;
+\draw ([yshift=15pt]Reg1.north-|B.north)
+-- (B.north) ;
+
+\node[draw=none] (T1) at ([yshift=-10pt]Pilha.south) {Barramento Interno de Dados};
+\draw[Latex-,dotted] ([yshift=-10pt]3,0|-Pilha.west) -- (T1.west) ;
+
+\draw[ultra thick,-] ([yshift=15pt,xshift=-15pt]B.west) --
+([yshift=-15pt,xshift=-15pt]UdC.south west) --
+node [draw=none,below,pos=0.5] {Barramento de Controle}
+([yshift=-15pt,xshift=15pt]Pilha.south east |- 
+UdC.south west) --
+([yshift=15pt,xshift=15pt] Pilha.south east |- B.west) 
+;
+
+\draw (Pilha.east) -- ([xshift=15pt]Pilha.east -| Pilha.south east);
+\draw (Pilha.east) -- ([xshift=15pt]Pilha.east -| Pilha.south east);
+\draw (Pilha.east) -- ([xshift=15pt]Pilha.east -| Pilha.south east);
+\draw (End.east) -- ([xshift=15pt]End.east -| Pilha.south east);
+
+\draw (UdC.west) -- ([xshift=-15pt]UdC.west -| UdC.south west);
+\draw (ALU.west) -- ([xshift=-15pt]ALU.west -| UdC.south west);
+\draw (B.west) -- ([xshift=-15pt]B.west -| UdC.south west);
+
+\end{tikzpicture}
+\end{verbatim}
+
+
+
+
+\begin{figure}
+    \centering
+\begin{tikzpicture}%
+[every node/.style={%
+draw,%
+black,%
+align=center,%
+node distance=1cm and 3cm,%
+minimum height = 1.5cm,%
+minimum width = 3cm,
+},
+registro/.style={%
+minimum height = 18pt,%
+minimum width = 4cm,
+node distance=.5cm and 3cm,%
+},
+every path/.style={%
+black,
+Latex-Latex,
+thick
+}%
+]
+
+\node (UdC) at (0,0) {Unidade \\ de Controle};
+\node (ALU) [above = of UdC]  {ALU};
+\node (B) [above = of ALU]  {Buffer};
+
+\node[registro] (Pilha) [right = of UdC] {Registro de Pilha};
+\node[registro] (End) [above = of Pilha] {Registro de Endereço};
+\node[registro] (Regn) [above = of End]  {Registro Geral N};
+\node[registro,draw=none] (Regp) [above = of Regn]  {...};
+\node[registro] (Reg2) [above = of Regp]  {Registro Geral 2};
+\node[registro] (Reg1) [above = of Reg2]  {Registro Geral 1};
+ 
+\node[draw=none] (ini) at  (2,-1) {};
+\node[draw=none]  at (2,7) {};
+ %($(UdC.south west)!.5!(Pilha.east)$)
+\draw[-,ultra thick] ([yshift=-10pt]3,0|-Pilha.west) -- ([yshift=10pt]3,0|-Reg1.west);
+\draw (Pilha.west) -- (3,0|-Pilha.west);
+\draw (Reg1.west) -- (3,0|-Reg1.west); 
+\draw (Reg2.west) -- (3,0|-Reg2.west);
+\draw (Regn.west) -- (3,0|-Regn.west);
+\draw (End.west) -- (3,0|-End.west);  
+\draw (ALU.east) -- (3,0|-ALU.east);  
+\draw (UdC.east) -- (3,0|-UdC.east);  
+\draw (B.east) -- (3,0|-B.east);  
+
+\draw[-,ultra thick] ([xshift=15pt,yshift=15pt]Reg1.north)
+-- node [pos=0.5,draw=none,above] {Barramento 
+de Dados} ([xshift=-15pt,yshift=15pt]Reg1.north-|B.north);
+\draw ([yshift=15pt]Reg1.north)
+-- (Reg1.north) ;
+\draw ([yshift=15pt]Reg1.north-|B.north)
+-- (B.north) ;
+
+\node[draw=none] (T1) at ([yshift=-10pt]Pilha.south) {Barramento Interno de Dados};
+\draw[Latex-,dotted] ([yshift=-10pt]3,0|-Pilha.west) -- (T1.west) ;
+
+\draw[ultra thick,-] ([yshift=15pt,xshift=-15pt]B.west) --
+([yshift=-15pt,xshift=-15pt]UdC.south west) --
+node [draw=none,below,pos=0.5] {Barramento de Controle}
+([yshift=-15pt,xshift=15pt]Pilha.south east |- 
+UdC.south west) --
+([yshift=15pt,xshift=15pt] Pilha.south east |- B.west) 
+;
+
+\draw (Pilha.east) -- ([xshift=15pt]Pilha.east -| Pilha.south east);
+\draw (Pilha.east) -- ([xshift=15pt]Pilha.east -| Pilha.south east);
+\draw (Pilha.east) -- ([xshift=15pt]Pilha.east -| Pilha.south east);
+\draw (End.east) -- ([xshift=15pt]End.east -| Pilha.south east);
+
+\draw (UdC.west) -- ([xshift=-15pt]UdC.west -| UdC.south west);
+\draw (ALU.west) -- ([xshift=-15pt]ALU.west -| UdC.south west);
+\draw (B.west) -- ([xshift=-15pt]B.west -| UdC.south west);
+
+\end{tikzpicture}    
+    \caption{Abstração da CPU, usa referências com shift e cálculo de pontos por interseção de uma referência vertical com uma horizontal, estilos genéricos e específicos}
+    \label{fig:comp12s}
+\end{figure}
+
+
+\begin{figure}[hbt]
+    \centering
+\begin{tikzpicture}[seta/.style = {-latex},
+adf/.style = {minimum width = 2cm}]
+  \node[doc,cascaded] (fet) at (0,0) {Fetch list};
+  \node[draw=none,right = of fet] (int) {};
+  \node[doc,cascaded, right = of int] (u) {Updates};
+  \node[doc,cascaded, right = of u] (c) {Content};
+  \node[doc,cascaded, right = of c] (i) {Indexes};
+
+\node[server,adf,above = 2.0cm of int,label=below:{web db}] (wd) {};
+\node[server,adf,below = 2.0cm of int,label=below:{fetchers}] (fs) {};
+\node[server,adf,above = of i,label=above:{indexers}] (is) {};
+\node[server,adf,below = of i,label=right:{searchers}] (ss) {};
+\node[server,adf,below = of ss,label=below:{web servers}] (ws) {};
+
+\draw[seta] (wd.west) to[bend right] (fet) ;
+\draw[seta] (u) to[bend right] (wd.east);
+\draw[seta] (fet) to[bend right] (fs.west);
+\draw[seta] (fs.east) to[bend right] (u);
+\draw[seta] (u) -- (c);
+\draw[seta] (is) -- (i);
+\draw[seta] (i) -- (ss);
+\draw[seta] (c) to[bend left] (is.west);
+\draw[seta] (c) to[bend right] (ss.west);
+\draw[latex-latex] (ss) -- (ws);
+\end{tikzpicture}
+\caption{Lucene?}
+\end{figure}
+
+\section{Mecanismos de Busca}
+
+\begin{figure}
+    \centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[every node/.style = {rectangle,draw,%
+minimum width = 15ex,
+rounded corners=4,
+minimum height = 24pt,
+node distance= 18pt and 24pt,
+align = center
+},
+every path/.style = {-latex},
+db/.style = {cylinder, 
+aspect=0.25,
+rounded corners=0,
+shape border rotate=90}]
+\node[cloud] (web) at (0,0) {Web};
+\node[right = of web] (crawler) {Crawler};
+\node[db, right = of crawler] (paginas) {Páginas};
+\node[right = of paginas] (prepro) {Pré-Processamento};
+\node[ellipse,fill = yellow,rounded corners=0,, below = of web] (anu) {Anunciante};
+\node[right = of anu] (sisanu) {Sistema de \\ Anúncios};
+\node[below = of prepro] (outras) {Outras \\ Análises};
+\node[right = of outras] (indexador) {Indexador};
+\node[right = of indexador] (arede) {Análise \\ da Rede};
+\node[below = of sisanu] (apre) {Aprendizado};
+\node[db,right = of apre] (muser) {Modelo \\ Usuário};
+\node[db, right = of muser] (outdad) {Outros \\ Dados};
+\node[db, below = of indexador] (indice) {Índice};
+\node[db, below = of arede] (mrede) {Modelo \\ da Rede};
+\node[below left = of apre] (obs) {Observador};
+\node[ellipse,fill = yellow,below = of obs] (user) {Usuário};
+\node[right = of user] (interf) {Interface};
+\node[right = of interf] (mod) {Modificador \\ de Consultas};
+\node[right = of mod] (busca) {Buscador};
+
+\draw (web) -- (crawler);
+\draw (crawler) -- (paginas);
+\draw (paginas) -- (prepro);
+\draw[latex-latex] (anu) -- (sisanu);
+\draw (sisanu) -- (outras);
+\draw (prepro) -- (outras);
+\draw ($(prepro.east)!.5!(prepro.south east)$) -| (indexador);
+\draw (prepro.east) -| (arede);
+\draw (arede) -- (mrede);
+\draw (indexador) -- (indice);
+\draw[latex-latex] (outras) -- (outdad);
+\draw (mrede) |- ($(busca.east)!.5!(busca.south east)$);
+\draw (indice) |- ($(busca.east)!.5!(busca.north east)$);
+\draw (outdad) -- (busca);
+\draw (outdad) -- (mod);
+\draw (muser) -- (mod);
+\draw (muser) -- (busca);
+\draw[latex-latex] (mod) -- (busca);
+\draw[latex-latex] (interf) -- (mod);
+\draw[latex-latex] (user) -- (interf);
+\draw (user) -- (obs);
+\draw (obs) -- (apre);
+\draw (apre) -- (muser);
+\draw (obs) -- (sisanu);
+\draw (obs.west) -| ($(anu.west)+
+(-.5,0)$) |- ($(outras.west)!0.5!(outras.north west)$);
+\draw (prepro.north) |- ($(paginas.north)+(0,.3)$) -| (crawler.north);
+\draw (obs) -| ($(outdad.south west)!.2!(outdad.south)$);
+\draw[latex-latex] (interf) -- (obs);
+\end{tikzpicture}
+}
+    \caption{Modelo genérico de um mecanismo de busca moderno}
+    \label{fig:mbm}
+\end{figure}
+
+\begin{figure}
+    \centering
+\resizebox{\textwidth}{!}{
+\begin{tikzpicture}[every node/.style = {rectangle,draw,%
+minimum width = 15ex,
+rounded corners=4,
+minimum height = 48pt,
+node distance= 36pt and 32pt,
+align = center
+},
+n/.style ={draw=none,minimum width = 0, minimum height = 0},
+every path/.style = {-latex},
+ruido/.style = {dashed},
+ss/.style = {latex-latex},
+db/.style = {cylinder, 
+aspect=0.25,
+rounded corners=0,
+shape border rotate=90},
+c1/.style={
+%minimum height = 1cm, minimum width=4cm , 
+aspect=1.5},
+d1/.style = {minimum width = 1cm,
+minimum height = 48pt}]
+
+\node[cloud,c1] (io) at (0,0) {Ideia \\ Original};
+\node[alice, minimum width=1cm,
+below right = of io] (em) {Emissor};
+\node[doc,d1,right = of em] (re) {Representação \\ Escrita};
+\node[right = of re] (ir) {Indexador};
+\node[db, right = of ir] (rp) {Repositório};
+\node[below = of ir] (mb) {Mecanismo \\ de Busca};
+\node[doc,d1,cascaded,left = of mb] (od) {Outros \\ Documentos};
+
+\node[cloud,c1,below left = of em] (ni) {Necessidade \\ da \\ Informação};
+\node[bob, minimum width=1cm,below right = of ni] (rc) {Receptor};
+\node[cloud,c1, left = of rc,aspect=1.7 ] (ii) {Interpretação};
+\node[doc,d1,right = of rc] (rn) {Representação \\ da Necessidade};
+
+\draw[ruido,ss] (io) to[bend left]node[n,midway,above,yshift=4pt] {1} (em);
+\draw[ruido,ss] (rc) to[bend left] node[n,midway,above] {g}  (ii);
+\draw[ruido,ss] (rc) to[bend right] node[n,midway,above,xshift=4pt] {a} (ni);
+\draw[ruido] (em) --node[n,midway,above] {2}   (re);
+\draw (re) --node[n,midway,above] {3} (ir);
+\draw[ruido] (ir) --node[n,midway,above] {4} (rp);
+
+\draw[ruido] (rp) --node[n,midway,above] {d} (mb);
+\draw (rn) --node[n,midway,above] {c} (mb);
+\draw[ruido] (mb) --node[n,midway,above] {e} (re);
+\draw[ruido] (re) to[bend right=10]node[n,midway,above] {f} (rc);
+\draw[ruido] (rc) --node[n,midway,above] {b} (rn);
+\draw[ruido] (mb) --node[n,midway,above] {e} (od);
+\draw[ruido] (od) --node[n,midway,above] {f} (rc);
+\end{tikzpicture}}
+
+    \caption{Caption Identificada 1}
+    \label{fig:my_labelsxg2}
+
+    
+\end{figure}
+
+\begin{figure}
+    \centering
+    
+\begin{tikzpicture}[every node/.style = {rectangle,draw,%
+minimum width = 15ex,
+rounded corners=4,
+minimum height = 24pt,
+node distance= 36pt and 32pt,
+align = center
+},
+every path/.style = {-latex},
+db/.style = {cylinder, 
+aspect=0.25,
+rounded corners=0,
+shape border rotate=90}]
+\node[doc,cascaded] (h) at (0,0) {HTML};
+\node[doc,cascaded, right = of h] (p) {PDF};
+\node[doc,cascaded, right = of p] (w) {Word};
+
+\node[below = of h] (et1) {Extrair Texto};
+\node[below = of p] (et2) {Extrair Texto};
+\node[below = of w] (et3) {Extrair Texto};
+
+\node[below = of et2] (a) {Análise};
+\node[db, below = of a] (i) {Índice};
+
+\draw (h) -- (et1);
+\draw (p) -- (et2);
+\draw (w) -- (et3);
+\draw (et1) -- (a);
+\draw (et2) -- (a);
+\draw (et3) -- (a);
+\draw (a) -- (i);
+\end{tikzpicture}
+    \caption{Indexar}
+    \label{fig:my_label2sd312}
+\end{figure}
+
+

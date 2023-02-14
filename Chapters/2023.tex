@@ -1,0 +1,35 @@
+\chapter{Mais!}
+\begin{figure}
+    \centering
+ \begin{tikzpicture}
+\draw[<->] (0,11) -- (0,0) -- (11,0);
+
+\foreach \i in {0,1,...,10} \draw (\i,0)--(\i,-.1);
+\foreach \i in {0,.2,...,1} \node[below] at (10*\i,0) {\pgfmathprintnumber
+[fixed,fixed zerofill,precision=1,use comma]
+{\i}};
+\node[below] at (5.5,-.5) {Revocação};
+
+\foreach \i in {0,1,...,10} \draw (0,\i)--(-.1,\i);
+\foreach \i in {0,.2,...,1} \node[left] at (0,10*\i) {\pgfmathprintnumber
+[fixed,fixed zerofill,precision=1,use comma]
+{\i}};
+\node[rotate=90] at (-.8,5.5) {Precisão};
+
+\draw[very thick] (1,10) .. 
+controls (8,9)  and    (3,0) 
+.. (10,1) ;
+
+\node at (4,10) {Consultas específicas};
+\node at (9,2) {Consultas genéricas};
+
+
+\end{tikzpicture}   
+    \caption{Caption}
+    \label{fig:my_label23}
+\end{figure}
+
+
+
+
+

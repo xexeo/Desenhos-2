@@ -1,0 +1,189 @@
+\documentclass{book}
+\usepackage[brazilian,english]{babel}
+%\usepackage[utf8]{inputenc}
+\usepackage[usenames,dvipsnames]{xcolor}
+\definecolor{ibm1}{HTML}{648fff}
+\definecolor{ibm2}{HTML}{785ef0}
+\definecolor{ibm3}{HTML}{dc267f}
+\definecolor{ibm4}{HTML}{fe6100}
+\definecolor{ibm5}{HTML}{ffb000}
+\usepackage[T1]{fontenc}
+\usepackage{datetime2}
+\usepackage[section]{placeins}
+\usepackage{chessboard}
+\usepackage[listings]{tcolorbox}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\newcommand{\gxmat}{\mathbf}
+
+
+
+\usepackage{pgf,tikz,tikz-qtree}
+\usepackage{mathrsfs}
+\usepackage{pgf-pie}
+\usetikzlibrary{arrows,chains}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{mindmap} 
+\usetikzlibrary{datavisualization}
+\usepackage{forest}
+\usetikzlibrary{datavisualization.formats.functions}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{shapes.arrows}
+\usetikzlibrary{calc}
+\usetikzlibrary{math}
+\usetikzlibrary{shapes.symbols}
+\usetikzlibrary{shapes.geometric}
+
+\usetikzlibrary{shadows} 
+\usetikzlibrary{automata} % state accepting
+\usetikzlibrary{positioning}  % on grid
+\usetikzlibrary{topaths,angles,quotes,babel}
+\usetikzlibrary{intersections}
+\usetikzlibrary{decorations} 
+\usetikzlibrary{decorations.shapes}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.text}
+\usepgflibrary{decorations.pathreplacing} 
+\usepgflibrary{decorations.markings} 
+\usepgflibrary{decorations.footprints} 
+\usepgflibrary{decorations.fractals} 
+\usetikzlibrary{matrix,arrows} 
+\usepackage{pgfplots}
+\usetikzlibrary{graphs}
+\usetikzlibrary{graphdrawing}
+\usegdlibrary{force} % LUALATEX is NEEDED
+
+\usetikzlibrary{backgrounds}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfdeclarelayer{bm}
+\pgfsetlayers{background,bm,main,foreground}
+\usetikzlibrary{fit}
+\usetikzlibrary{graphs,graphs.standard}
+\usetikzlibrary{graphdrawing}
+\usegdlibrary{trees,force,layered}
+
+\usepackage{moeptikz}
+\usepackage{tikzpeople}
+\usetikzlibrary{patterns,patterns.meta} 
+\pgfplotsset{compat=1.14}
+\makeatletter
+\pgfdeclareshape{document}{
+\inheritsavedanchors[from=rectangle] % this is nearly a rectangle
+\inheritanchorborder[from=rectangle]
+\inheritanchor[from=rectangle]{center}
+\inheritanchor[from=rectangle]{north}
+\inheritanchor[from=rectangle]{south}
+\inheritanchor[from=rectangle]{west}
+\inheritanchor[from=rectangle]{east}
+% ... and possibly more
+\backgroundpath{% this is new
+% store lower right in xa/ya and upper right in xb/yb
+\southwest \pgf@xa=\pgf@x \pgf@ya=\pgf@y
+\northeast \pgf@xb=\pgf@x \pgf@yb=\pgf@y
+% compute corner of ‘‘flipped page’’
+\pgf@xc=\pgf@xb \advance\pgf@xc by-10pt % this should be a parameter
+\pgf@yc=\pgf@yb \advance\pgf@yc by-10pt
+% construct main path
+\pgfpathmoveto{\pgfpoint{\pgf@xa}{\pgf@ya}}
+\pgfpathlineto{\pgfpoint{\pgf@xa}{\pgf@yb}}
+\pgfpathlineto{\pgfpoint{\pgf@xc}{\pgf@yb}}
+\pgfpathlineto{\pgfpoint{\pgf@xb}{\pgf@yc}}
+\pgfpathlineto{\pgfpoint{\pgf@xb}{\pgf@ya}}
+\pgfpathclose
+% add little corner
+\pgfpathmoveto{\pgfpoint{\pgf@xc}{\pgf@yb}}
+\pgfpathlineto{\pgfpoint{\pgf@xc}{\pgf@yc}}
+\pgfpathlineto{\pgfpoint{\pgf@xb}{\pgf@yc}}
+\pgfpathlineto{\pgfpoint{\pgf@xc}{\pgf@yc}}
+}
+}
+\makeatother
+
+\tikzstyle{doc}=[%
+draw,
+thick,
+align=center,
+color=black,
+shape=document,
+minimum width=20mm,
+minimum height=28.2mm,
+shape=document,
+inner sep=2ex,
+rounded corners=0
+]
+\tikzset{%
+  cascaded/.style = {%
+    general shadow = {%
+      shadow scale = 1,
+      shadow xshift = 1ex,
+      shadow yshift = 1ex,
+      draw,
+      thick,
+      fill = white},
+    general shadow = {%
+      shadow scale = 1,
+      shadow xshift = .5ex,
+      shadow yshift = .5ex,
+      draw,
+      thick,
+      fill = white},
+    fill = white, 
+    draw,
+    thick,
+    minimum width = 1.5cm,
+    minimum height = 2cm}}
+%\usepackage[all,cmtip]{xy}
+
+\definecolor{blech}{rgb}{.78,.78.,.62}
+
+\newcommand{\fnurl}[1]{\footnote{\url{#1}}}
+
+\usepackage{hyperref}
+
+\title{\LaTeX\ - A Book of Drawings \\ An ever evolving document}
+\author{Geraldo Xexéo}
+\date{\today \  \DTMcurrenttime }
+\usepackage{chronosys}
+
+\lstdefinestyle{myLateX}
+{ language=[LaTeX]{TeX},
+  texcsstyle=*\color{blue},
+  basicstyle=\ttfamily,
+  moretexcs={draw,path,node}, % user command highlight
+  frame=single,
+}
+
+
+\begin{document}
+\frontmatter
+\maketitle
+
+\tableofcontents
+
+\listoffigures
+
+\mainmatter
+
+\input{Chapters/Intro}
+\input{Chapters/3DandFake}
+\input{Chapters/Microsoftlike}
+\input{Chapters/Shades}
+\input{Chapters/GraphsAndTrees}
+\input{Chapters/CoordenadasCartesianas}
+\input{Chapters/CircleMagick}
+\input{Chapters/EntendendoMedidas}
+\input{Chapters/Other}
+\input{Chapters/2023.tex}
+\input{Chapters/Arquiteturas.tex}
+\input{Chapters/NeuralNetworks.tex}
+
+
+
+\end{document}
+
+

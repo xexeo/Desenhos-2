@@ -1,0 +1,77 @@
+\chapter{Neural Networks}
+
+\newcommand{\nnnode}[5]{
+\node[#1,k,#2](#3) {#4};
+\node[k,right = of #3]{#5};
+}
+
+\begin{figure}[hbt]
+\begin{tikzpicture}[%
+k/.style = {node distance = 10pt and 1em},
+g/.style = {fill=green,draw,circle,minimum width = 24pt,minimum height = 24pt},
+r/.style = {fill =red,draw,circle,circle,minimum width = 24pt,minimum height = 24pt},
+b/.style = {fill =cyan,draw,circle,minimum width = 24pt,minimum height = 24pt},
+%p/.style = {purple,draw,circle},
+j/.style={fill=yellow,circle,draw,minimum width = 24pt,minimum height = 24pt},
+]
+\node[j,k] (ic) at (0,0)  { };
+\node[k,right = of ic] {Input Cell};
+
+%\nnnode{j}{below = of ic}{BFIC}{\circ}{Backfed Input Cell}
+%\nnnode{j}{below = of BFIC}{nic} {\triangleright}{Noisy Input Cell};
+\nnnode{g}{below = of ic}{hc}{}{Hidden Cell}
+\nnnode{b}{below = of hc}{rc}{}{Recurrent Cell}
+\nnnode{b}{below = of rc}{mc}{\circ}{Memory Cell}
+\nnnode{r}{below = of mc}{oc}{}{Output Cell}
+
+\node[j,k,below=of oc] (ff11)  { };
+\node[j,k,below=of ff11] (ff12)  { };
+\node[g,k,right=of ff11] (ff21)  { };
+\node[g,k,below=of ff21] (ff22)  { };
+\node[r,k,right=of ff21,yshift=-16pt] (ffo)  { };
+\draw (ff11) -- (ff21);
+\draw (ff11) -- (ff22);
+\draw (ff12) -- (ff21);
+\draw (ff12) -- (ff22);
+\draw (ff21) -- (ffo);
+\draw (ff22) -- (ffo);
+\end{tikzpicture}
+\caption{Tipo de NN}
+\end{figure}
+\begin{figure}[hbt]
+    \centering
+\begin{tikzpicture}[i/.style={%
+node distance = .4ex and 12ex,minimum width=3.5em,
+minimum height=3.5em
+},
+j/.style={node distance = .4ex and 12ex},
+r/.style={fill=white}
+]
+\node[j] (C1) at (0,0){$i_1$};
+\node[j,below = of C1] (C2) {$i_2$};
+\node[j,below = of C2] (C3) {$\vdots$};
+\node[j,below = of C3] (C4) {$i_{k-1}$};
+\node[j,below = of C4] (C5) {$i_{k}$};
+\node[j,below = of C5] (C6) {$i_{k+1}$};
+\node[j,below = of C6] (C7) {$\vdots$};
+\node[j,below = of C7] (C8) {$i_{n-1}$};
+\node[j,below = of C8] (C9) {$i_{n}$};
+
+\node[i,draw,circle,right = of C5] (cs) {$\sum$};
+\node[i,draw,circle,right = of cs] (C11) {$g$};
+\draw[->] (C1) to node[swap,pos=.5,r] {$w_1$} (cs);
+\draw[->] (C2) to node[midway,pos=.5,r] {$w_2$}(cs);
+\draw[->] (C4) to node[midway,pos=.5,r] {$w_{k-1}$}(cs);
+\draw[->] (C5) to node[midway,pos=.5,r] {$w_k$}(cs);
+\draw[->] (C6) to node[midway,pos=.5,r] {$w_{k+1}$}(cs);
+\draw[->] (C8) to node[midway,pos=.5,r] {$w_{n-1}$}(cs);
+\draw[->] (C9) to node[midway,pos=.5,r] {$w_n$}(cs);
+\node[i,right = of C1] (cb) {$bias$};
+\draw[->] (cb) to node[midway,pos=.5,r] {$w_{0}$}(cs);
+\draw[->] (cs) to node[midway,pos=.5,r] {$s$}(C11);
+\node[right = of C11] (C12) {};
+\draw[->] (C11) to node[midway,pos=.5,r] {$o$}(C12);
+\end{tikzpicture}
+    \caption{A Single Neuron in a Neural Network}
+    \label{fig:my_label21312}
+\end{figure}

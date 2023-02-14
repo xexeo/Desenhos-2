@@ -1,0 +1,34 @@
+\chapter{Transparences, Shades}
+
+\tikzfading[name=fade out,
+            inner color = transparent!0,
+            outer color = transparent!70]
+\begin{figure}[hbt]
+\centering
+\def\firstcircle{(0,0) circle (1.5cm)}
+\def\secondcircle{(0:2cm) circle (1.5cm)}
+\begin{tikzpicture}[opacity=0.5]
+ \fill [path fading=fade out,
+        fading transform={xshift=0.3cm,
+        yshift=0.5cm}] \firstcircle;
+\end{tikzpicture}
+    \caption{Shading, Fdding and Transform}
+\end{figure}
+
+
+
+
+\begin{figure}[hbt]
+\centering
+\def\firstcircle{(0,0) circle (1.5cm)}
+\def\secondcircle{(0:2cm) circle (1.5cm)}
+\begin{tikzpicture}[blend group=multiply]
+ \fill [red,path fading=fade out] \firstcircle;
+ \fill [blue,path fading=fade out] \secondcircle;
+    \draw \firstcircle node[below] {$A$}
+          \secondcircle node[below=1.5cm] {$B$};
+    \node[anchor=south] at (current bounding box.north) {$A \cup B$};
+
+\end{tikzpicture}
+    \caption{Multiplicando cores fading}
+\end{figure}

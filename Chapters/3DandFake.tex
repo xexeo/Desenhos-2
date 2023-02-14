@@ -1,0 +1,261 @@
+\chapter{3D and Fake 3D}
+
+Some times I had to build some 3D drawings based on boxes, for example, to describe a Data Warehouse Cube. There is an easy solution that is to develop a basic cube subroutine and use them to build more complex figures.
+
+O próximo código construi uma caixa calculando os pontos, como uma projeção de 3D em 3D.
+
+\begin{lstlisting}[style=myLateX,caption=Cubo azul em Fake 3D]
+\newcommand{\drawbox}[5]{
+    \pgfmathsetmacro \angle {30}
+    \pgfmathsetmacro \xd {{2/3*cos(\angle)*#5}}
+    \pgfmathsetmacro \yd {{2/3*sin(\angle)*#5}}
+    \pgfmathsetmacro \x {{#1-#5+(#2-#5)*(\xd)*#5}}
+    \pgfmathsetmacro \y {{#3-#5+(#2-#5)*(\yd)*#5}}
+
+    \draw[fill=#4] (\x,\y) --
+    (\x+#5,\y) -- (\x+#5,\y+#5) --
+    (\x,\y+#5) -- cycle;
+    
+    \draw[fill=#4] (\x,\y+#5) -- 
+    (\x+\xd,\y+#5+\yd) -- 
+    (\x+#5+\xd,\y+#5+\yd) --
+    (\x+#5,\y+#5) -- cycle;
+    
+    \draw[fill=#4] (\x+#5,\y+#5) --
+    (\x+#5+\xd,\y+#5+\yd) --
+    (\x+#5+\xd,\y+\yd) -- 
+    (\x+#5,\y) -- cycle;
+
+\drawbox{}{1}{1}{blue}{1}  
+}    
+\end{lstlisting}
+
+\newcommand{\drawbox}[5]{
+    \pgfmathsetmacro \angle {30}
+    \pgfmathsetmacro \xd {{2/3*cos(\angle)*#5}}
+    \pgfmathsetmacro \yd {{2/3*sin(\angle)*#5}}
+    \pgfmathsetmacro \x {{#1-#5+(#2-#5)*(\xd)*#5}}
+    \pgfmathsetmacro \y {{#3-#5+(#2-#5)*(\yd)*#5}}
+
+    \draw[fill=#4] (\x,\y) -- (\x+#5,\y) -- (\x+#5,\y+#5) -- (\x,\y+#5) -- cycle;
+    
+    \draw[fill=#4] (\x,\y+#5) -- (\x+\xd,\y+#5+\yd) -- (\x+#5+\xd,\y+#5+\yd) -- (\x+#5,\y+#5) -- cycle;
+    
+    \draw[fill=#4] (\x+#5,\y+#5) -- (\x+#5+\xd,\y+#5+\yd) -- (\x+#5+\xd,\y+\yd) -- (\x+#5,\y) -- cycle;
+}
+
+
+A simple blue cube, \autoref{fig:box3dfake}, can be easily drawn with:
+
+
+
+\begin{figure}[hbt]
+    \centering
+  \begin{tikzpicture}
+  \drawbox{}{1}{1}{blue}{1}
+  \end{tikzpicture}
+    \caption{A fake 3D cube}
+    \label{fig:box3dfake}
+\end{figure}
+
+And a composite figure can use the order of drawing to build a cube made of cubes, as in \autoref{fig:box3dfake1}.
+
+\begin{lstlisting}[style=myLaTeX,caption=A cube made of cubes]
+
+\pgfmathsetmacro{\profX}{5}
+
+  \drawbox{1}{\profX}{1}{green}{.5}
+  \drawbox{1.5}{\profX}{1}{green}{.5}
+  \drawbox{2}{\profX}{1}{green}{.5}
+  
+  \drawbox{1}{\profX}{1.5}{green!50}{.5}
+  \drawbox{1.5}{\profX}{1.5}{green!50}{.5}
+  \drawbox{2}{\profX}{1.5}{green!50}{.5}
+  
+  \drawbox{1}{\profX}{2}{green!25}{.5}
+  \drawbox{1.5}{\profX}{2}{green!25}{.5}
+  \drawbox{2}{\profX}{2}{green!25}{.5}
+  
+  \pgfmathsetmacro{\profX}{3}
+  
+  \drawbox{1}{\profX}{1}{red}{.5}
+  \drawbox{1.5}{\profX}{1}{red}{.5}
+  \drawbox{2}{\profX}{1}{red}{.5}
+  
+  \drawbox{1}{\profX}{1.5}{red!50}{.5}
+  \drawbox{1.5}{\profX}{1.5}{red!50}{.5}
+  \drawbox{2}{\profX}{1.5}{red!50}{.5}
+  
+  \drawbox{1}{\profX}{2}{red!25}{.5}
+  \drawbox{1.5}{\profX}{2}{red!25}{.5}
+  \drawbox{2}{\profX}{2}{red!25}{.5}
+
+  \drawbox{1}{1}{1}{blue}{.5}
+  \drawbox{1.5}{1}{1}{blue}{.5}
+  \drawbox{2}{1}{1}{blue}{.5}
+ 
+  \drawbox{1}{1}{1.5}{blue!50}{.5}
+  \drawbox{1.5}{1}{1.5}{blue!50}{.5}
+  \drawbox{2}{1}{1.5}{blue!50}{.5}
+  
+  \drawbox{1}{1}{2}{blue!25}{.5}
+  \drawbox{1.5}{1}{2}{blue!25}{.5}
+  \drawbox{2}{1}{2}{blue!25}{.5}
+     
+\end{lstlisting}
+
+\begin{figure}[hbt]
+    \centering
+\begin{tikzpicture}
+\pgfmathsetmacro{\profX}{5}
+
+  \drawbox{1}{\profX}{1}{green}{.5}
+  \drawbox{1.5}{\profX}{1}{green}{.5}
+  \drawbox{2}{\profX}{1}{green}{.5}
+  
+  \drawbox{1}{\profX}{1.5}{green!50}{.5}
+  \drawbox{1.5}{\profX}{1.5}{green!50}{.5}
+  \drawbox{2}{\profX}{1.5}{green!50}{.5}
+  
+  \drawbox{1}{\profX}{2}{green!25}{.5}
+  \drawbox{1.5}{\profX}{2}{green!25}{.5}
+  \drawbox{2}{\profX}{2}{green!25}{.5}
+  
+  \pgfmathsetmacro{\profX}{3}
+  
+  \drawbox{1}{\profX}{1}{red}{.5}
+  \drawbox{1.5}{\profX}{1}{red}{.5}
+  \drawbox{2}{\profX}{1}{red}{.5}
+  
+  \drawbox{1}{\profX}{1.5}{red!50}{.5}
+  \drawbox{1.5}{\profX}{1.5}{red!50}{.5}
+  \drawbox{2}{\profX}{1.5}{red!50}{.5}
+  
+  \drawbox{1}{\profX}{2}{red!25}{.5}
+  \drawbox{1.5}{\profX}{2}{red!25}{.5}
+  \drawbox{2}{\profX}{2}{red!25}{.5}
+
+  \drawbox{1}{1}{1}{blue}{.5}
+  \drawbox{1.5}{1}{1}{blue}{.5}
+  \drawbox{2}{1}{1}{blue}{.5}
+ 
+  \drawbox{1}{1}{1.5}{blue!50}{.5}
+  \drawbox{1.5}{1}{1.5}{blue!50}{.5}
+  \drawbox{2}{1}{1.5}{blue!50}{.5}
+  
+  \drawbox{1}{1}{2}{blue!25}{.5}
+  \drawbox{1.5}{1}{2}{blue!25}{.5}
+  \drawbox{2}{1}{2}{blue!25}{.5}
+ 
+  \end{tikzpicture}
+    \caption{A fake 3D cube of cubes}
+    \label{fig:box3dfake1}
+\end{figure}
+
+It is also possible to use fixed coordinates, such as the following code, that result in \autoref{fig:2cubes}.
+
+\begin{lstlisting}[style=myLaTeX,caption=A cube with fixed 2d Coordinates]
+    
+
+\begin{tikzpicture}[scale=0.33] %[x={10.0pt},y={10.0pt}]
+\draw[line width=2pt] (0,0) -- (0,10);
+\draw[line width=2pt] (0,0) -- (10,0);
+\draw[line width=2pt] (0,10) -- (10,10);
+\draw[line width=2pt] (0,10) -- (10,10);
+\draw[line width=2pt] (10,0) -- (10,10);
+\draw[line width=2pt] (0,0) -- (3,5);
+\draw[line width=2pt] (10,0) -- (13,5);
+\draw[line width=2pt] (0,10) -- (3,15);
+\draw[line width=2pt] (10,10) -- (13,15);
+\draw[line width=2pt] (3,5) -- (13,5);
+\draw[line width=2pt] (3,5) -- (3,15);
+\draw[line width=2pt] (13,5) -- (13,15);
+\draw[line width=2pt] (3,15) -- (13,15);
+\draw[line width=1pt] (5,0) -- (5,10);
+\draw[line width=1pt] (5,10) -- (8,15);
+\draw[line width=1pt] (5,0) -- (8,5);
+\draw[line width=1pt] (8,5) -- (8,15);
+\draw[black, fill=blue,fill opacity=0.5] (5,0) -- (5,10) -- (8,15) -- (8,5) -- cycle;
+\end{tikzpicture}% pic 1
+\qquad % <----------------- SPACE BETWEEN PICTURES
+% ou
+%\hspace{3cm}
+\begin{tikzpicture}[scale=0.33] %[x={10.0pt},y={10.0pt}]
+\draw[line width=2pt] (0,0) -- (0,10);
+\draw[line width=2pt] (0,0) -- (10,0);
+\draw[line width=2pt] (0,10) -- (10,10);
+\draw[line width=2pt] (0,10) -- (10,10);
+\draw[line width=2pt] (10,0) -- (10,10);
+\draw[line width=2pt] (0,0) -- (3,5);
+\draw[line width=2pt] (10,0) -- (13,5);
+\draw[line width=2pt] (0,10) -- (3,15);
+\draw[line width=2pt] (10,10) -- (13,15);
+\draw[line width=2pt] (3,5) -- (13,5);
+\draw[line width=2pt] (3,5) -- (3,15);
+\draw[line width=2pt] (13,5) -- (13,15);
+\draw[line width=2pt] (3,15) -- (13,15);
+\draw[line  width=1pt] (0,10) -- (10,0);
+\draw[line  width=1pt] (0,10) -- (3,5);
+\draw[line  width=1pt] (3,5) -- (10,0);
+\draw[black, fill=blue,fill opacity=0.5] (0,10) -- (10,0) -- (3,5) -- cycle;
+\draw[line  width=1pt] (3,15) -- (10,10);
+\draw[line  width=1pt] (3,15) -- (13,5);
+\draw[line  width=1pt] (10,10) -- (13,5);
+\draw[black, fill=blue,fill opacity=0.5] (3,15) -- (10,10) -- (13,5) -- cycle;
+\end{tikzpicture}% pic 2    
+\end{lstlisting}
+
+
+\begin{figure}[hbt]
+\begin{center}
+\begin{tikzpicture}[scale=0.33] %[x={10.0pt},y={10.0pt}]
+\draw[line width=2pt] (0,0) -- (0,10);
+\draw[line width=2pt] (0,0) -- (10,0);
+\draw[line width=2pt] (0,10) -- (10,10);
+\draw[line width=2pt] (0,10) -- (10,10);
+\draw[line width=2pt] (10,0) -- (10,10);
+\draw[line width=2pt] (0,0) -- (3,5);
+\draw[line width=2pt] (10,0) -- (13,5);
+\draw[line width=2pt] (0,10) -- (3,15);
+\draw[line width=2pt] (10,10) -- (13,15);
+\draw[line width=2pt] (3,5) -- (13,5);
+\draw[line width=2pt] (3,5) -- (3,15);
+\draw[line width=2pt] (13,5) -- (13,15);
+\draw[line width=2pt] (3,15) -- (13,15);
+\draw[line width=1pt] (5,0) -- (5,10);
+\draw[line width=1pt] (5,10) -- (8,15);
+\draw[line width=1pt] (5,0) -- (8,5);
+\draw[line width=1pt] (8,5) -- (8,15);
+\draw[black, fill=blue,fill opacity=0.5] (5,0) -- (5,10) -- (8,15) -- (8,5) -- cycle;
+\end{tikzpicture}% pic 1
+\qquad % <----------------- SPACE BETWEEN PICTURES
+% ou
+%\hspace{3cm}
+\begin{tikzpicture}[scale=0.33] %[x={10.0pt},y={10.0pt}]
+\draw[line width=2pt] (0,0) -- (0,10);
+\draw[line width=2pt] (0,0) -- (10,0);
+\draw[line width=2pt] (0,10) -- (10,10);
+\draw[line width=2pt] (0,10) -- (10,10);
+\draw[line width=2pt] (10,0) -- (10,10);
+\draw[line width=2pt] (0,0) -- (3,5);
+\draw[line width=2pt] (10,0) -- (13,5);
+\draw[line width=2pt] (0,10) -- (3,15);
+\draw[line width=2pt] (10,10) -- (13,15);
+\draw[line width=2pt] (3,5) -- (13,5);
+\draw[line width=2pt] (3,5) -- (3,15);
+\draw[line width=2pt] (13,5) -- (13,15);
+\draw[line width=2pt] (3,15) -- (13,15);
+\draw[line  width=1pt] (0,10) -- (10,0);
+\draw[line  width=1pt] (0,10) -- (3,5);
+\draw[line  width=1pt] (3,5) -- (10,0);
+\draw[black, fill=blue,fill opacity=0.5] (0,10) -- (10,0) -- (3,5) -- cycle;
+\draw[line  width=1pt] (3,15) -- (10,10);
+\draw[line  width=1pt] (3,15) -- (13,5);
+\draw[line  width=1pt] (10,10) -- (13,5);
+\draw[black, fill=blue,fill opacity=0.5] (3,15) -- (10,10) -- (13,5) -- cycle;
+\end{tikzpicture}% pic 2
+\end{center}
+    \caption{Two cubes and 3 planes.}
+    \label{fig:2cubes}
+\end{figure}
+
