@@ -836,3 +836,23 @@ controls (8,9)  and    (3,0)
 
 
 \end{tikzpicture}
+
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+axis lines = left,
+xlabel = $f_{i,j}$,
+ylabel = $\mathrm{TF}_K$
+]
+\addplot [domain=0:20, samples=40,thick, color=ibm2]
+{x/(x+1)} node [pos=0.3, above left] {$K=1$}  ;
+\addplot [dotted,domain=0:20, samples=40,thick, color=ibm3]
+{x/(x+5)} node [pos=0.9, above left] {$K=5$}  ;
+\addplot [dashed,domain=0:20, samples=40,thick, color=ibm4]
+{x/(x+10)} node [pos=0.9, above left] {$K=10$}  ;
+\end{axis}
+\end{tikzpicture}
+\caption{Várias funções (usa pgfplot) no eixo 2D}
+\end{figure}

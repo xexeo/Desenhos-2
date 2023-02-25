@@ -15,19 +15,19 @@ O próximo código construi uma caixa calculando os pontos, como uma projeção 
     \draw[fill=#4] (\x,\y) --
     (\x+#5,\y) -- (\x+#5,\y+#5) --
     (\x,\y+#5) -- cycle;
-    
-    \draw[fill=#4] (\x,\y+#5) -- 
-    (\x+\xd,\y+#5+\yd) -- 
+
+    \draw[fill=#4] (\x,\y+#5) --
+    (\x+\xd,\y+#5+\yd) --
     (\x+#5+\xd,\y+#5+\yd) --
     (\x+#5,\y+#5) -- cycle;
-    
+
     \draw[fill=#4] (\x+#5,\y+#5) --
     (\x+#5+\xd,\y+#5+\yd) --
-    (\x+#5+\xd,\y+\yd) -- 
+    (\x+#5+\xd,\y+\yd) --
     (\x+#5,\y) -- cycle;
 
-\drawbox{}{1}{1}{blue}{1}  
-}    
+\drawbox{}{1}{1}{blue}{1}
+}
 \end{lstlisting}
 
 \newcommand{\drawbox}[5]{
@@ -38,9 +38,9 @@ O próximo código construi uma caixa calculando os pontos, como uma projeção 
     \pgfmathsetmacro \y {{#3-#5+(#2-#5)*(\yd)*#5}}
 
     \draw[fill=#4] (\x,\y) -- (\x+#5,\y) -- (\x+#5,\y+#5) -- (\x,\y+#5) -- cycle;
-    
+
     \draw[fill=#4] (\x,\y+#5) -- (\x+\xd,\y+#5+\yd) -- (\x+#5+\xd,\y+#5+\yd) -- (\x+#5,\y+#5) -- cycle;
-    
+
     \draw[fill=#4] (\x+#5,\y+#5) -- (\x+#5+\xd,\y+#5+\yd) -- (\x+#5+\xd,\y+\yd) -- (\x+#5,\y) -- cycle;
 }
 
@@ -67,25 +67,25 @@ And a composite figure can use the order of drawing to build a cube made of cube
   \drawbox{1}{\profX}{1}{green}{.5}
   \drawbox{1.5}{\profX}{1}{green}{.5}
   \drawbox{2}{\profX}{1}{green}{.5}
-  
+
   \drawbox{1}{\profX}{1.5}{green!50}{.5}
   \drawbox{1.5}{\profX}{1.5}{green!50}{.5}
   \drawbox{2}{\profX}{1.5}{green!50}{.5}
-  
+
   \drawbox{1}{\profX}{2}{green!25}{.5}
   \drawbox{1.5}{\profX}{2}{green!25}{.5}
   \drawbox{2}{\profX}{2}{green!25}{.5}
-  
+
   \pgfmathsetmacro{\profX}{3}
-  
+
   \drawbox{1}{\profX}{1}{red}{.5}
   \drawbox{1.5}{\profX}{1}{red}{.5}
   \drawbox{2}{\profX}{1}{red}{.5}
-  
+
   \drawbox{1}{\profX}{1.5}{red!50}{.5}
   \drawbox{1.5}{\profX}{1.5}{red!50}{.5}
   \drawbox{2}{\profX}{1.5}{red!50}{.5}
-  
+
   \drawbox{1}{\profX}{2}{red!25}{.5}
   \drawbox{1.5}{\profX}{2}{red!25}{.5}
   \drawbox{2}{\profX}{2}{red!25}{.5}
@@ -93,15 +93,15 @@ And a composite figure can use the order of drawing to build a cube made of cube
   \drawbox{1}{1}{1}{blue}{.5}
   \drawbox{1.5}{1}{1}{blue}{.5}
   \drawbox{2}{1}{1}{blue}{.5}
- 
+
   \drawbox{1}{1}{1.5}{blue!50}{.5}
   \drawbox{1.5}{1}{1.5}{blue!50}{.5}
   \drawbox{2}{1}{1.5}{blue!50}{.5}
-  
+
   \drawbox{1}{1}{2}{blue!25}{.5}
   \drawbox{1.5}{1}{2}{blue!25}{.5}
   \drawbox{2}{1}{2}{blue!25}{.5}
-     
+
 \end{lstlisting}
 
 \begin{figure}[hbt]
@@ -112,25 +112,25 @@ And a composite figure can use the order of drawing to build a cube made of cube
   \drawbox{1}{\profX}{1}{green}{.5}
   \drawbox{1.5}{\profX}{1}{green}{.5}
   \drawbox{2}{\profX}{1}{green}{.5}
-  
+
   \drawbox{1}{\profX}{1.5}{green!50}{.5}
   \drawbox{1.5}{\profX}{1.5}{green!50}{.5}
   \drawbox{2}{\profX}{1.5}{green!50}{.5}
-  
+
   \drawbox{1}{\profX}{2}{green!25}{.5}
   \drawbox{1.5}{\profX}{2}{green!25}{.5}
   \drawbox{2}{\profX}{2}{green!25}{.5}
-  
+
   \pgfmathsetmacro{\profX}{3}
-  
+
   \drawbox{1}{\profX}{1}{red}{.5}
   \drawbox{1.5}{\profX}{1}{red}{.5}
   \drawbox{2}{\profX}{1}{red}{.5}
-  
+
   \drawbox{1}{\profX}{1.5}{red!50}{.5}
   \drawbox{1.5}{\profX}{1.5}{red!50}{.5}
   \drawbox{2}{\profX}{1.5}{red!50}{.5}
-  
+
   \drawbox{1}{\profX}{2}{red!25}{.5}
   \drawbox{1.5}{\profX}{2}{red!25}{.5}
   \drawbox{2}{\profX}{2}{red!25}{.5}
@@ -138,15 +138,15 @@ And a composite figure can use the order of drawing to build a cube made of cube
   \drawbox{1}{1}{1}{blue}{.5}
   \drawbox{1.5}{1}{1}{blue}{.5}
   \drawbox{2}{1}{1}{blue}{.5}
- 
+
   \drawbox{1}{1}{1.5}{blue!50}{.5}
   \drawbox{1.5}{1}{1.5}{blue!50}{.5}
   \drawbox{2}{1}{1.5}{blue!50}{.5}
-  
+
   \drawbox{1}{1}{2}{blue!25}{.5}
   \drawbox{1.5}{1}{2}{blue!25}{.5}
   \drawbox{2}{1}{2}{blue!25}{.5}
- 
+
   \end{tikzpicture}
     \caption{A fake 3D cube of cubes}
     \label{fig:box3dfake1}
@@ -155,7 +155,7 @@ And a composite figure can use the order of drawing to build a cube made of cube
 It is also possible to use fixed coordinates, such as the following code, that result in \autoref{fig:2cubes}.
 
 \begin{lstlisting}[style=myLaTeX,caption=A cube with fixed 2d Coordinates]
-    
+
 
 \begin{tikzpicture}[scale=0.33] %[x={10.0pt},y={10.0pt}]
 \draw[line width=2pt] (0,0) -- (0,10);
@@ -202,7 +202,7 @@ It is also possible to use fixed coordinates, such as the following code, that r
 \draw[line  width=1pt] (3,15) -- (13,5);
 \draw[line  width=1pt] (10,10) -- (13,5);
 \draw[black, fill=blue,fill opacity=0.5] (3,15) -- (10,10) -- (13,5) -- cycle;
-\end{tikzpicture}% pic 2    
+\end{tikzpicture}% pic 2
 \end{lstlisting}
 
 
@@ -257,5 +257,275 @@ It is also possible to use fixed coordinates, such as the following code, that r
 \end{center}
     \caption{Two cubes and 3 planes.}
     \label{fig:2cubes}
+\end{figure}
+
+\section{Trying to draw a Ellisoid}
+
+\begin{figure}[htb]
+\begin{tikzpicture}[x={(1cm,0cm)},y={(0cm,1cm)},z={(0.8cm,0.6cm)}]
+% ellipsoid
+\draw[gray] (0,0,0) arc (90:270:1 and 2);
+\draw[dashed,gray] (0,0,0) arc (90:-90:1 and 2);
+\draw[gray] (0,0,0) arc (270:450:1 and 2);
+\draw[dashed,gray] (0,0,0) arc (270:90:1 and 2);
+\draw[gray] (1,0,0) arc (0:360:1 and 0.5);
+% axes
+\draw[->] (0,0,0) -- (3,0,0) node[anchor=north east]{$x$};
+\draw[->] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};
+\draw[->] (0,0,0) -- (0,0,3) node[anchor=south]{$z$};
+\end{tikzpicture}
+\caption{Doido que eu devia arrumar}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[baseline=(current bounding box.center),x=0.5cm,y=0.5cm,z=0.3cm]
+  \coordinate (O) at (0,0,0);
+  \coordinate (A) at (6,0,0);
+  \coordinate (B) at (0,3,0);
+  \coordinate (C) at (0,0,4);
+
+  \draw[-Latex] (O) -- (A) node[above] {$x$};
+  \draw[-Latex] (O) -- (B) node[above] {$y$};
+  \draw[-Latex] (O) -- (C) node[right] {$z$};
+
+  \pgfmathsetmacro{\a}{4}
+  \pgfmathsetmacro{\b}{2}
+  \pgfmathsetmacro{\c}{1}
+
+  \draw[ball color=blue!40,opacity=0.5] (O) ellipse ({\a} and {\b});
+
+  \draw[thick,blue,-latex] (O) -- ({\a},0,0) node[anchor=north east]{$a$};
+  \draw[thick,blue,-latex] (O) -- (0,{\b},0) node[anchor=north west]{$b$};
+  \draw[thick,blue,-latex] (O) -- (0,0,{\c}) node[anchor=south]{$c$};
+
+\begin{scope}[canvas is xz plane at y=0]
+        \draw[dashed] (0,0) circle[x radius=\a, y radius=\c];
+    \end{scope}
+
+    \begin{scope}[canvas is xy plane at z=0]
+        \draw[dashed] (0,0) circle[x radius=\a, y radius=\b];
+    \end{scope}
+
+    \begin{scope}[canvas is yz plane at x=0]
+        \draw[dashed] (0,0) circle[x radius=\b, y radius=\c];
+    \end{scope}
+
+\end{tikzpicture}
+\caption{Usa ball e fica bonitinho}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+
+\begin{tikzpicture}[scale=2, x={(1cm,0cm)}, y={(0cm,1cm)}, z={(0.5cm,0.5cm)}]
+    \pgfmathsetmacro\a{1}
+    \pgfmathsetmacro\b{0.7}
+    \pgfmathsetmacro\c{0.5}
+
+    \begin{scope}[canvas is xz plane at y=0]
+        \draw[dashed] (0,0) circle[x radius=\a, y radius=\c];
+    \end{scope}
+
+    \begin{scope}[canvas is xy plane at z=0]
+        \draw[dashed] (0,0) circle[x radius=\a, y radius=\b];
+    \end{scope}
+
+    \begin{scope}[canvas is yz plane at x=0]
+        \draw[dashed] (0,0) circle[x radius=\b, y radius=\c];
+    \end{scope}
+
+    \draw[->] (-1.5,0,0) -- (1.5,0,0) node[right]{$x$};
+    \draw[->] (0,-1.5,0) -- (0,1.5,0) node[above]{$y$};
+    \draw[->] (0,0,-1.5) -- (0,0,1.5) node[below left]{$z$};
+
+    \pgfmathsetmacro\anglex{30}
+    \pgfmathsetmacro\angley{45}
+
+    \begin{scope}[rotate around x=\anglex]
+        \begin{scope}[rotate around y=\angley]
+            \draw[fill=blue!50, opacity=0.5] (0,0,0) plot[variable=\t, domain=0:2*pi] ({\a*cos(deg(\t))},{\b*sin(deg(\t))},0) plot[variable=\t, domain=0:2*pi] ({\a*cos(deg(\t))},0,{\c*sin(deg(\t))}) plot[variable=\t, domain=0:2*pi] (0,{\b*cos(deg(\t))},{\c*sin(deg(\t))});
+        \end{scope}
+    \end{scope}
+\end{tikzpicture}
+\caption{Consertado por mim}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}
+[view={135}{20},%colormap/blackwhite,
+axis lines=center, axis on top,ticks=none,
+set layers=default,axis equal,
+xlabel={$x$}, ylabel={$y$}, zlabel={$z$},
+xlabel style={anchor=south east},
+ylabel style={anchor=south west},
+zlabel style={anchor=south west},
+enlargelimits,
+tick align=inside,
+domain=0:2.00,
+samples=20,
+z buffer=sort,
+]
+\addplot3 [surf,opacity=0.4,domain=-1:0,
+domain y=0:360] ({sin(y)*sqrt(1-x^2)},{2*cos(y)*sqrt(1-x^2)},{x});
+\addplot3 [surf,opacity=0.4,domain=0:1,
+domain y=0:360,on layer=axis foreground] ({sin(y)*sqrt(1-x^2)},{2*cos(y)*sqrt(1-x^2)},{x});
+\end{axis}
+\end{tikzpicture}
+\caption{Quente que eu achei em um site}
+% https://tex.stackexchange.com/questions/417491/draw-an-ellipsoid}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[scale=2]
+  \pgfmathsetmacro\a{2}
+  \pgfmathsetmacro\b{1.5}
+  \pgfmathsetmacro\c{1}
+  \pgfmathsetmacro\x{3} % x-axis scale factor
+
+  % ellipsoid coordinates
+  \foreach \theta in {0,10,...,170}
+    \foreach \phi in {0,10,...,360}
+    {
+      \pgfmathsetmacro\x{\a*sin(\theta)*cos(\phi)}
+      \pgfmathsetmacro\y{\b*sin(\theta)*sin(\phi)}
+      \pgfmathsetmacro\z{\c*cos(\theta)}
+      \coordinate (e) at (\x,\y,\z);
+      \pgfmathsetmacro\rotX{30} % rotation angle in x
+      \pgfmathsetmacro\rotY{45} % rotation angle in y
+      \path (e) [rotate around x=\rotX, rotate around y=\rotY] coordinate (e');
+      \draw[black!50] (e')--++(0,0.02,0) (e')--++(0,-0.02,0) (e')--++(0,0,0.02) (e')--++(0,0,-0.02);
+    }
+
+  % x-axis
+  \draw[red, very thick, -latex] (0,0,0) -- (\a*\x,0,0);
+  \node[red, above] at (\a*\x/2,0,0) {$x$};
+
+  % y-axis
+  \draw[green!70!black, very thick, -latex] (0,0,0) -- (0,\b,0);
+  \node[green!70!black, right] at (0,\b/2,0) {$y$};
+
+  % z-axis
+  \draw[blue, very thick, -latex] (0,0,0) -- (0,0,\c);
+  \node[blue, above] at (0,0,\c/2) {$z$};
+\end{tikzpicture}
+\caption{Não sei como o Chat GPT gerou isso}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}
+[view={135}{20},colormap={blue}{
+            color=(blue) color=(blue)
+        },
+axis lines=center,axis on top,
+ticks=none,set layers=default,axis equal,
+xlabel={$x$}, ylabel={$y$}, zlabel={$z$},
+xlabel style={anchor=south east},
+ylabel style={anchor=south west},
+zlabel style={anchor=south west},
+enlargelimits,
+tick align=inside,
+domain=0:2.00,
+samples=20,
+z buffer=sort,
+]
+\addplot3 [surf,draw=blue!30,fill=white,domain=-1:1,samples=20,
+domain y=00:180] ({x},{-2*cos(y)*sqrt(1-x^2)},{-sin(y)*sqrt(1-x^2)});
+\addplot3 [surf,draw=blue!30,fill=white,domain=-1:1,
+domain y=0:180,on layer=axis foreground] ({x},{2*cos(y)*sqrt(1-x^2)},{sin(y)*sqrt(1-x^2)});
+\end{axis}
+\end{tikzpicture}
+\caption{Bem parecido com que eu quero}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[remember picture]
+%\pgfsetlayers{pre main,main,axis foregound}
+\begin{axis}
+[view={135}{20},colormap={blue}{
+            color=(cyan) color=(cyan)
+        },axis lines=none,axis equal,set layers=standard,
+enlargelimits,domain=0:2,samples=20, z buffer=sort,
+]
+
+\pgfonlayer{axis background}
+\draw[-] (axis cs:0,0,-1.5)--(axis cs:0,0,-1);
+\draw[-] (axis cs:0,-3,0)--(axis cs:0,-2,0);
+\draw[-] (axis cs:-2,0,0)--(axis cs:-1,0,0);
+\addplot3[draw=none] coordinates{(0,0,-2) (0,0,2)};
+\addplot3[draw=none] coordinates{(0,-2.5,0) (0,2.8,0)};
+\endpgfonlayer
+\pgfonlayer{main}
+\addplot3 [surf,draw=cyan,fill=white,domain=0:1,samples=20,
+domain y=00:180] ({x},{-2*cos(y)*sqrt(1-x^2)},{-sin(y)*sqrt(1-x^2)});
+\addplot3 [surf,draw=cyan,fill=white,domain=0:1,
+domain y=0:180,on layer=axis foreground] ({x},{2*cos(y)*sqrt(1-x^2)},{sin(y)*sqrt(1-x^2)});
+\coordinate(x1) at (axis cs:1,0,0);
+\coordinate(x2) at (axis cs:1.5,0,0);
+\coordinate(y1) at (axis cs:0,1.9,0);
+\coordinate(y2) at (axis cs:0,2.5,0);
+\coordinate(z1) at (axis cs:0,0,0.9);
+\coordinate(z2) at (axis cs:0,0,1.5);
+\endpgfonlayer
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}[remember picture,overlay]
+\draw[->] (x1)--(x2)node[left]{$x$};
+\draw[->] (y1)--(y2)node[right]{$y$};
+\draw[->] (z1)--(z2)node[right]{$z$};
+\end{tikzpicture}
+\caption{Novamente parecido com que eu quero}
+\end{figure}
+
+\begin{figure}
+
+\begin{center}
+\begin{tikzpicture}[baseline=(current bounding box.center),x=0.5cm,y=0.5cm,z=0.3cm]
+  \coordinate (O) at (0,0,0);
+  \coordinate (A) at (6,0,0);
+  \coordinate (B) at (0,3,0);
+  \coordinate (C) at (0,0,4);
+
+  \draw[-Latex] (O) -- (A) node[above] {$x$};
+  \draw[-Latex] (O) -- (B) node[above] {$y$};
+  \draw[-Latex] (O) -- (C) node[right] {$z$};
+
+\begin{scope}[rotate around y=30,rotate around z=-30]
+
+  \pgfmathsetmacro{\a}{4}
+  \pgfmathsetmacro{\b}{2}
+  \pgfmathsetmacro{\c}{1}
+
+
+
+  %ellipse ({\a} and {\b});
+
+  \draw[thick,blue,-latex] (O) -- ({\a},0,0) node[anchor=north east]{$a$};
+  \draw[thick,blue,-latex] (O) -- (0,{\b},0) node[anchor=north west]{$b$};
+  \draw[thick,blue,-latex] (O) -- (0,0,{\c}) node[anchor=south]{$c$};
+
+    \begin{scope}[canvas is xz plane at y=0]
+    \draw[dashed] (O) circle[x radius=\a, y radius=\c];
+    \end{scope}
+    \begin{scope}[canvas is xy plane at z=0]
+      \draw[ball color=blue!40,opacity=0.5] (O)  circle[x radius=\a, y radius=\b];
+        \draw[dashed] (O) circle[x radius=\a, y radius=\b];
+    \end{scope}
+    \begin{scope}[canvas is yz plane at x=0]
+        \draw[dashed] (O) circle[x radius=\b, y radius=\c];
+    \end{scope}
+
+\end{scope}
+
+\end{tikzpicture}
+\end{center}
+
+\caption{Rotação por escopo!}
 \end{figure}
 

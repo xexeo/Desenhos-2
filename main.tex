@@ -22,13 +22,14 @@
 
 
 
-\usepackage{pgf,tikz,tikz-qtree}
+\usepackage{pgf,tikz,tikz-qtree,pgfplots}
+\pgfplotsset{compat=1.16}
 \usepackage{mathrsfs}
 \usepackage{pgf-pie}
 \usetikzlibrary{arrows,chains}
 \usetikzlibrary{arrows.meta}
-\usetikzlibrary{mindmap} 
-\usetikzlibrary{datavisualization}
+\usetikzlibrary{mindmap}
+\usetikzlibrary{datavisualization,3d }
 \usepackage{forest}
 \usetikzlibrary{datavisualization.formats.functions}
 \usetikzlibrary{shapes.misc}
@@ -38,20 +39,20 @@
 \usetikzlibrary{shapes.symbols}
 \usetikzlibrary{shapes.geometric}
 
-\usetikzlibrary{shadows} 
+\usetikzlibrary{shadows}
 \usetikzlibrary{automata} % state accepting
 \usetikzlibrary{positioning}  % on grid
 \usetikzlibrary{topaths,angles,quotes,babel}
 \usetikzlibrary{intersections}
-\usetikzlibrary{decorations} 
+\usetikzlibrary{decorations}
 \usetikzlibrary{decorations.shapes}
 \usetikzlibrary{decorations.pathmorphing}
 \usetikzlibrary{decorations.text}
-\usepgflibrary{decorations.pathreplacing} 
-\usepgflibrary{decorations.markings} 
-\usepgflibrary{decorations.footprints} 
-\usepgflibrary{decorations.fractals} 
-\usetikzlibrary{matrix,arrows} 
+\usepgflibrary{decorations.pathreplacing}
+\usepgflibrary{decorations.markings}
+\usepgflibrary{decorations.footprints}
+\usepgflibrary{decorations.fractals}
+\usetikzlibrary{matrix,arrows}
 \usepackage{pgfplots}
 \usetikzlibrary{graphs}
 \usetikzlibrary{graphdrawing}
@@ -69,7 +70,7 @@
 
 \usepackage{moeptikz}
 \usepackage{tikzpeople}
-\usetikzlibrary{patterns,patterns.meta} 
+\usetikzlibrary{patterns,patterns.meta}
 \pgfplotsset{compat=1.14}
 \makeatletter
 \pgfdeclareshape{document}{
@@ -132,7 +133,7 @@ rounded corners=0
       draw,
       thick,
       fill = white},
-    fill = white, 
+    fill = white,
     draw,
     thick,
     minimum width = 1.5cm,

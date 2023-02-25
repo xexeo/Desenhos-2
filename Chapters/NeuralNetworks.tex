@@ -75,3 +75,57 @@ r/.style={fill=white}
     \caption{A Single Neuron in a Neural Network}
     \label{fig:my_label21312}
 \end{figure}
+
+\begin{figure}
+\begin{tikzpicture}[
+every node/.style={align=center},
+every path/.style={-{Latex},draw=black},
+lay/.style={draw=black}
+]
+
+\node[lay] (tp2) at (0,0) {$t_{k+2}$};
+\node[lay] (tp1) at (0,1) {$t_{k+1}$};
+\node[lay] (tm1) at (0,3) {$t_{k-1}$};
+\node[lay] (tm2) at (0,4) {$t_{k-2}$};
+
+\node (r1) at (0,5) {Entrada};
+\node (r2) at (2,5) {Projeção};
+\node (r3) at (4,5) {Saída};
+
+\node[lay] (soma) at (2,2) {Soma};
+\node[lay](t0) at (4,2) {$t_k$};
+
+\path (tp2) -> (soma);
+\path (tp1) -> (soma);
+\path (tm1) -> (soma);
+\path (tm2) -> (soma);
+\path (soma) -> (t0);
+
+
+\node (cbow) at (2,-1) {\textbf{CBOW}};
+%-------------
+\node[lay] (wp2) at (10,0) {$t_{k+2}$};
+\node[lay] (wp1) at (10,1) {$t_{k+1}$};
+\node[lay] (wm1) at (10,3) {$t_{k-1}$};
+\node[lay] (wm2) at (10,4) {$t_{k-2}$};
+
+\node (rr1) at (6,5) {Entrada};
+\node (rr2) at (8,5) {Projeção};
+\node (rr3) at (10,5) {Saída};
+
+\node[lay,text=white] (soma2) at (8,2) {Soma};
+\node[lay](w0) at (6,2) {$t_k$};
+
+\path  (soma2) -> (wp2);
+\path  (soma2) -> (wp1);
+\path  (soma2) -> (wm1);
+\path  (soma2) -> (wm2);
+\path (w0) -> (soma2);
+
+
+\node (cbow) at (8,-1) {\textbf{Skip-Gram}};
+
+
+\end{tikzpicture}
+\caption{word2vec}
+\end{figure}
